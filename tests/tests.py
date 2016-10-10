@@ -7,6 +7,12 @@ from source_code.payment_calculator import PaymentCalculator
 
 class Tests(TestCase):
 
+    PURCHASE_PRICE = '500000'
+    DOWN_PAYMENTS = '50000'
+    AMORTIZATION = '15'
+    TAX_INTEREST = 5
+    EXPECTED_PAYMENT = "836.75"
+    PAYMENT_FREQUENCY = "weekly"
 
     def test_a_slider_moing(self):
         start_page = StartPage()
@@ -24,7 +30,16 @@ class Tests(TestCase):
 
     def test_b_calculation(self):
         payment_calculator = PaymentCalculator()
-        payment_calculator.set_purchase_price("500000")
+        payment_calculator.set_purchase_price(self.PURCHASE_PRICE)
+        payment_calculator.set_down_payments(self.DOWN_PAYMENTS)
+        payment_calculator.set_amortization(self.AMORTIZATION)
+        payment_calculator.set_tax_interest(self.TAX_INTEREST)
+        payment_calculator.set_payment_frequent(self.PAYMENT_FREQUENCY)
+        payment_calculator.click_calculate_button()
+
+        self.assertEqual(self.EXPECTED_PAYMENT, payment_calculator.get_calculation_result(),
+                         "The result is not %s. %s is shown" % (self.EXPECTED_PAYMENT,
+                                                                payment_calculator.get_calculation_result()))
 
 
 

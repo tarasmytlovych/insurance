@@ -9,8 +9,13 @@ class BasePage:
         self.driver = driver if driver else WebDriverProvider.get_driver(URL=ia_url)
 
     def wait_for_visibility_of_element(self, locator):
-        return WebDriverWait(driver=self.driver, timeout=20)\
+        return WebDriverWait(driver=self.driver, timeout=15)\
             .until(EC.visibility_of_element_located(locator=locator))
+
+    def wait_for_element_to_be_clickable(self, locator):
+        return WebDriverWait(driver=self.driver, timeout=20) \
+            .until(EC.element_to_be_clickable(locator = locator))
+
 
 
 

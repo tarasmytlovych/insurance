@@ -18,5 +18,6 @@ class MortgagePage(BasePage):
 
 
     def click_calculate_your_payments(self):
+        #if
         self._get_calculate_payments_button().click()
         return PaymentCalculator(driver = self.driver)
